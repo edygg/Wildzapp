@@ -36,9 +36,31 @@ $(document).ready(function() {
 	});
 	
 	$('.conversation').on('click', function() {
+		var conversation = $(this);
+		
 		$('#all_conversations').hide('slow', function() {
+			var to = conversation.data('to');
+			$('.to_u').html(to.toUpperCase());
+			$('.chat-box-main').empty();
+			$.get('/chat/getAllMessages/' + currentUser + '/' + to, function (data) {
+				for (var i = 0; i < data.length; i++) {
+					if (data[i].from == currentUser)
+						$('.chat-box-main').append(myMessage(currentUser, data[i].body));
+					else
+						$('.chat-box-main').append(otherUserMessage(data[i].from, data[i].body));
+				}
+			});
 			$('#specific_conversation').show('slow', function() {
 				//Termino de mostrar una conversación específica
+			});
+		});
+	});
+	
+	$('#back').on('click', function(e) {
+		e.preventDefault();
+		$('#specific_conversation').hide('slow', function() {
+			$('#all_conversations').show('slow', function() {
+				
 			});
 		});
 	});
@@ -50,4 +72,13 @@ $(document).ready(function() {
 	socket.on('receive message', function(data) {
 		$('.messages').append('<p>'+ data.username + " dice: " + data.msg + '</p>');
 	});
+	
+	//messages methods
+	function otherUserMessage(user, msg) {
+		return $('<div class="chat-box-left">' + msg + '</div><div class="chat-box-name-left">' + user + '</div>');
+	}
+	
+	function myMessage(user, msg) {
+		return $('<div class="chat-box-right">' + msg + '</div><div class="chat-box-name-right">' + user + '</div>');
+	}
 });

@@ -21,4 +21,13 @@ router.get('/getUsername', function(req, res, next) {
 		res.json({ username: req.session.username });
 });
 
+router.get('/getAllMessages/:from/:to', function(req, res, next) {
+	models.Conversation.getAllMessages(req.params.from, req.params.to, function (err, conversation) {
+		if (conversation && conversation.messages !== null)
+			res.json(conversation.messages);
+		else 
+			res.json([]);
+	});
+});
+
 module.exports = router;

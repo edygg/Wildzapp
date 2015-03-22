@@ -20,9 +20,7 @@
 		
 		<div class="conversations">
 			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new_message_modal">
-				Nuevo mensaje
-			</button>
+			
 			
 			<!-- Modal -->
 			<div class="modal fade" id="new_message_modal" tabindex="-1" role="dialog" aria-labelledby="newMessageLabel" aria-hidden="true">
@@ -79,11 +77,12 @@
                     <div class="panel-body chat-box-new">
 											<% for (var i = 0; i < conversations.length; i++) { %>
 											<div class="conversation" data-to="<%= conversations[i].to == currentUser ? conversations[i].from : conversations[i].to %>">
-												<span class="user"><%= conversations[i].to == currentUser ? conversations[i].from : conversations[i].to %></span>
+												<span class="user"><b><%= conversations[i].to == currentUser ? conversations[i].from : conversations[i].to %>:</b>  </span>
 												<span class="last_message"><%= conversations[i].messages[conversations[i].messages.length - 1].body.substr(0, 50) %></span>
+                           <hr class="hr-clas" />
 											</div>
 											<% } %>
-                         <hr class="hr-clas" />
+                        
                     </div>
 										
 
@@ -92,8 +91,53 @@
             </div>
      </div>
 		
-		<div id="specific_conversation" class="redondito">
-			<label>Destinatario</label><input type="text" id="to_user_chat" />
+		<div id="specific_conversation" class="redondito row pad-top pad-bottom">
+			<div class="col-sm-6 col-sm-offset-3">
+        <div class="chat-box-div">
+          <!-- Head-->
+          <div class="chat-box-head">
+						<div class="pull-left">
+							<button class="btn btn-info" id="back"><i class="fa fa-arrow-left"></i></button>
+						</div>
+            <span class="to_u">USERNAME</span>
+          </div>  
+         <!-- body chat   -->
+          
+           <div  class="panel-body chat-box-main">
+             <!-- mensaje -->
+             <div class="chat-box-left">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </div>
+            <!-- nombre del usuario --> 
+             <div class="chat-box-name-left">
+              -  Justine Goliyad
+             </div>
+             
+              <div class="chat-box-right">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </div>
+            <!-- nombre del usuario --> 
+             <div class="chat-box-name-right">
+              -  Justine Goliyad
+             </div>
+              
+             
+           </div>
+          <div class="chat-box-footer">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter Text Here...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-info" type="button">SEND</button>
+                            </span>
+                        </div>
+                    </div>
+        </div>
+      </div>
+      
+      <!--
+      <label>Destinatario</label><input type="text" id="to_user_chat" />
 			<div class="messages">
 			</div>
 			<form class="send_message_chat">
@@ -102,6 +146,7 @@
 					<input type="submit" value="Enviar" />
 				</fieldset>
 			</form>
+           -->
 		</div>
 		<!-- Scripts -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
